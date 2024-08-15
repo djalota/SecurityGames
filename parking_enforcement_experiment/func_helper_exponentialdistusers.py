@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils import *
+import tikzplotlib
 
 '''
 Genderate the list of all types for each location
@@ -64,9 +65,10 @@ def plot_welfare_num_strategic(multiplier_arr, existing_welfare, greedy_welfare,
     ax.plot(multiplier_arr, greedy_welfare)
     ax.plot(multiplier_arr, other_greedy_welfare)
     ax.plot(multiplier_arr, random_welfare)
-    ax.legend(['Actual', 'Greedy', 'Other Greedy', 'Random'])
+    #ax.legend(['Actual', 'Greedy', 'Other Greedy', 'Random'])
     ax.set_xlabel('Proportion of Strategic Users')
     ax.set_ylabel('Total Welfare')
+    tikzplotlib.save("payoff_plot_permit_rev.tex")
 
 def plot_welfare_frac_num_strategic(multiplier_arr, existing_welfare, greedy_welfare, other_greedy_welfare, random_welfare, max_val):
 
@@ -81,10 +83,12 @@ def plot_welfare_frac_num_strategic(multiplier_arr, existing_welfare, greedy_wel
         random_welfare_total.append((random_welfare[idx])/max_val)
 
     fig, ax = plt.subplots()
+    print(greedy_welfare_total[5], existing_welfare_total[5])
     ax.plot(multiplier_arr, existing_welfare_total)
     ax.plot(multiplier_arr, greedy_welfare_total)
     ax.plot(multiplier_arr, other_greedy_welfare_total)
     ax.plot(multiplier_arr, random_welfare_total)
-    ax.legend(['Actual', 'Greedy', 'Other Greedy', 'Random'])
-    ax.set_xlabel('Multiplier Value')
-    ax.set_ylabel('Fraction of Total Welfare')
+    #ax.legend(['Status Quo', 'Our Algorithm', 'Our Algorithm (No Citation Data)', 'Random'])
+    ax.set_xlabel('Citation Multiplier')
+    ax.set_ylabel('Fraction of Total Permit Revenue')
+    tikzplotlib.save("payoff_plot_frac_permit_rev.tex")

@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils import *
+import tikzplotlib
 
 def compute_value_onlystrategic(df_space, permit_dict, param_):
     
@@ -77,11 +78,13 @@ def plot_welfare_frac_num_strategic(strategic_arr, existing_welfare, greedy_welf
         random_welfare_total.append((random_welfare[idx] + baseline_permit_earnings)/max_val)
         existing_welfare_total.append((existing_welfare[idx] + baseline_permit_earnings)/max_val)
 
+    print(greedy_welfare_total[2], existing_welfare_total[2])
     fig, ax = plt.subplots()
     ax.plot(strategic_arr, existing_welfare_total)
     ax.plot(strategic_arr, greedy_welfare_total)
     ax.plot(strategic_arr, random_welfare_total)
     ax.plot(strategic_arr, [1 - i for i in strategic_arr])
-    ax.legend(['Actual', 'Greedy', 'Random', 'No Enforcement'])
+    #ax.legend(['Status Quo', 'Our Algorithm', 'Random', 'No Enforcement'])
     ax.set_xlabel('Proportion of Strategic Users')
-    ax.set_ylabel('Fraction of Total Welfare')
+    ax.set_ylabel('Fraction of Total Permit Revenue')
+    tikzplotlib.save("payoff_plot_frac_permit_rev_counterfactual1.tex")

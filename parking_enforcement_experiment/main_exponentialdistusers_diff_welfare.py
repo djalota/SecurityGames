@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils import *
-from helper_functions import *
-from greedy_algorithm_helper import *
+from helper_functions_diff_welfare import *
+from greedy_algorithm_helper_diff_welfare import *
 from func_helper_exponentialdistusers import *
 import warnings
 warnings.filterwarnings("ignore")
@@ -68,8 +68,9 @@ for multiplier in multiplier_arr:
 
     citations_per_lot['Citations per Day'] = [citations_per_lot['Total Citations'][i]/result_lot['Number of Unique Days'][i] for i in range(len(citations_per_lot['Total Citations']))]
 
-
     citations_per_lot['Citations per Day'] = citations_per_lot['Citations per Day']*multiplier
+
+    print(citations_per_lot)
 
     merged_df = pd.merge(citations_per_lot, df_space, left_on='Lot', right_on='LOT')
     merged_df_frac = pd.merge(citations_per_lot, df_space, left_on='Lot', right_on='LOT')
@@ -103,7 +104,7 @@ for multiplier in multiplier_arr:
     df_lambda.replace([np.inf, -np.inf], 0, inplace=True)
 
     # Define the percentile ranges
-    percentiles = np.arange(0, 1.1, 0.01)  # From 0 to 1 with step 0.1
+    percentiles = np.arange(0, 1, 0.01)  # From 0 to 1 with step 0.1
 
     # Initialize DataFrame to store probabilities
     columns = [f'{permit_type} {int(p1 * 100)}-{int(p2 * 100)} percentile' 
@@ -189,6 +190,8 @@ for multiplier in multiplier_arr:
         # Append the result for this lot
         results.append((row['LOT'], ub_pairs))
         results2.append((row['LOT'], lb_vals))
+
+    #print(results2)
 
     '''
     Compute the total number of available resources

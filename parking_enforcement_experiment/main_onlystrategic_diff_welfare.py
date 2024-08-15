@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils import *
-from helper_functions import *
-from greedy_algorithm_helper import *
+from helper_functions_diff_welfare import *
+from greedy_algorithm_helper_diff_welfare import *
 from func_helper_onlystrategic import *
 
 '''
@@ -157,6 +157,8 @@ plot_welfare_num_strategic(strategic_arr, existing_welfare, greedy_welfare, rand
 max_val = sum([j_[1][-1][0] for j_ in results])
 
 plot_welfare_frac_num_strategic(strategic_arr, existing_welfare, greedy_welfare, random_welfare, max_val)
+
+print(existing_welfare[5], greedy_welfare[5], max_val)
 
 '''
 Compare the Actual Allocation to the Greedy allocation
